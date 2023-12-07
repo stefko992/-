@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+struct Parallelepiped {
+    double length, width, height;
+};
+
+double calculateVolume(const struct Parallelepiped* p) {
+    return p->length * p->width * p->height;
+}
+
+int main() {
+    int n;
+    printf("Enter the number of parallelepipeds: ");
+    scanf_s("%d", &n);
+
+    struct Parallelepiped array[1];
+    double volumes[1], maxVolume = 0;
+    int maxVolumeIndex = -1;
+
+    for (int i = 0; i < n; ++i) {
+        printf("Parallelepiped %d:\nLength: ", i + 1);
+        scanf_s("%lf", &array[i].length);
+        printf("Width: ");
+        scanf_s("%lf", &array[i].width);
+        printf("Height: ");
+        scanf_s("%lf", &array[i].height);
+
+        volumes[i] = calculateVolume(&array[i]);
+        if (volumes[i] > maxVolume) {
+            maxVolume = volumes[i];
+            maxVolumeIndex = i;
+        }
+    }
+
+    printf("\nParallelepiped with the maximum volume:\n");
+    printf("Length: %.2lf, Width: %.2lf, Height: %.2lf\nVolume: %.2lf\n\n",
+        array[maxVolumeIndex].length, array[maxVolumeIndex].width,
+        array[maxVolumeIndex].height, maxVolume);
+
+    printf("Parallelepipeds sorted by volume:\n");
+    for (int i = 0; i < n; ++i) {
+        printf("Volume: %.2lf, Length: %.2lf, Width: %.2lf, Height: %.2lf\n",
+            volumes[i], array[i].length, array[i].width, array[i].height);
+    }
+
+    return 0;
+}   
